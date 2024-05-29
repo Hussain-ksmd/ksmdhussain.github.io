@@ -1,0 +1,614 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      background: #f0f0f0;
+    }
+
+    nav {
+      height: 100px;
+      width: 100%;
+      /* Ensure the navigation bar spans 80% width of the viewport */
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      /* Ensure the navigation bar is on top of other elements */
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      border-bottom-left-radius: 20%;
+      border-bottom-right-radius: 20%;
+    }
+
+    .logo {
+      font-size: 1.5em;
+      font-weight: 700;
+      color: #22489E;
+      /* Change logo color */
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: color 0.3s ease, transform 0.3s ease;
+      /* Add transition for hover effect */
+      margin-left: 5%;
+    }
+
+    .logo:hover {
+      color: #BDCDEA;
+      /* Hover effect for logo */
+      transform: scale(1.1);
+      /* Slightly scale up on hover */
+    }
+
+    nav ul {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+      display: flex;
+      align-items: center;
+      height: 100%;
+      /* Ensure the UL takes the full height of the navigation bar */
+      margin-right: 5%;
+      /* Add 20% margin to the right */
+    }
+
+    nav ul li {
+      margin-left: 20px;
+      position: relative;
+    }
+
+    nav ul li a {
+      color: #22489E;
+      /* Change text color */
+      text-decoration: none;
+      font-size: 1em;
+      padding: 10px 15px;
+      display: block;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: 0;
+      left: 50%;
+      background-color: #22489E;
+      /* Change underline color */
+      transition: width 0.3s ease, left 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: #BDCDEA;
+      /* Change hover effect color */
+      transform: scale(1.1);
+    }
+
+    nav ul li a:hover::after {
+      width: 100%;
+      left: 0;
+    }
+
+    /* Hero Section */
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      /* Full viewport height */
+      padding: 0 20px;
+      box-sizing: border-box;
+      margin-top: 100px;
+      /* To account for the fixed navbar */
+    }
+
+    .hero img {
+      max-width: 100%;
+      /* Ensure the image does not exceed its container */
+      height: auto;
+      /* Maintain aspect ratio */
+      border-radius: 10px;
+      /* Add border radius for elegance */
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      /* Add subtle shadow */
+      border-radius: 45px 45px 8px 45px;
+      /* Bottom-right corner rounded */
+    }
+
+    .hero img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 48px rgba(34, 72, 158, 2);
+      transition: background-color 8s, transform 3s;
+    }
+
+    .hero-content {
+      max-width: 500px;
+      margin-left: 80px;
+      text-align: center;
+    }
+
+    .hero-content h1 {
+      font-size: 2.5em;
+      margin: 0;
+    }
+
+    .hero-content h2 {
+      font-size: 1.5em;
+      margin: 10px 0 0 0;
+      color: #555;
+    }
+
+    /* Media Query for Responsive Design */
+    @media (max-width: 768px) {
+      .logo {
+        font-size: 1.2em;
+      }
+
+      nav {
+        width: 100%;
+        /* Full width for mobile view */
+      }
+
+      nav ul {
+        display: none;
+        position: absolute;
+        top: 100px;
+        left: 0;
+        width: 100%;
+        /* Full width for mobile menu */
+        background: rgba(255, 255, 255, 0.2);
+        /* Background for mobile menu */
+        flex-direction: column;
+        padding: 0;
+      }
+
+      nav ul.active {
+        display: flex;
+      }
+
+      nav ul li {
+        margin: 10px 0;
+        width: 100%;
+        text-align: center;
+      }
+
+      nav ul li a {
+        color: #22489E;
+        /* Change text color */
+      }
+
+      /* Mobile Menu Icon */
+      .menu-icon {
+        display: block;
+        /* Ensure the menu icon is always displayed */
+        cursor: pointer;
+        color: #22489E;
+        /* Change color to match text color */
+        font-size: 1.5em;
+        margin-right: 20%;
+        /* Added margin to the right */
+      }
+
+      .menu-icon div {
+        width: 25px;
+        height: 3px;
+        background-color: #22489E;
+        margin: 6px 0;
+        transition: all 0.3s ease;
+      }
+
+      .menu-icon.active div:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+
+      .menu-icon.active div:nth-child(2) {
+        opacity: 0;
+      }
+
+      .menu-icon.active div:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+      }
+
+      .hero {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .hero img {
+        margin-bottom: 20px;
+      }
+
+      .hero-content {
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div class="logo">Hussain</div>
+    <div class="menu-icon" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <ul id="menu">
+      <li><a href="#">About</a></li>
+      <li><a href="#">Skills</a></li>
+      <li><a href="#">Projects</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="hero">
+    <img src="https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg" height="10px" width="300px" alt="Profile Image">
+    <div class="hero-content">
+      <h2>I am Hussain</h2>
+      <h1>Software Engineer</h1>
+    </div>
+  </div>
+  <div class="Skills">
+    <div></div>
+    <div></div>
+  </div>
+  <div class="Projects">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <div class="Contact">
+    <div></div>
+    <div></div>
+  </div>
+  <script>
+    function toggleMenu() {
+      var menu = document.getElementById("menu");
+      menu.classList.toggle("active");
+      var icon = document.querySelector('.menu-icon');
+      icon.classList.toggle('active');
+    }
+  </script>
+</body>
+
+</html>
+
+<!-- 00000000000000000000000000000 this is end line here 00000000000000000000000000000 -->
+<div class="skills-section">
+    <style>
+        @keyframes fadeInBlur {
+            0% {
+                opacity: 0;
+                filter: blur(10px);
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                filter: blur(0);
+                transform: scale(1);
+            }
+        }
+
+        .skills-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        .skills-section h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-align: center;
+            animation: fadeInBlur 1s ease-in-out;
+        }
+
+        .skills-list {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap; /* Wrap skills to the next line on smaller screens */
+        }
+
+        .skill {
+            background-color: #22489E;
+            color: #fff;
+            width: 140px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 5px;
+            font-size: 1.2em;
+            opacity: 0;
+            animation: fadeInBlur 1s ease-in-out forwards;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .skill:hover {
+            background-color: #BDCDEA;
+            color: #22489E;
+        }
+
+        .skill:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .skill:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        .skill:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        .skill:nth-child(4) {
+            animation-delay: 0.8s;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 600px) {
+            .skills-section h2 {
+                font-size: 1.5em; /* Adjust heading size for smaller screens */
+            }
+
+            .skills-list {
+                gap: 10px; /* Reduce gap between skills */
+            }
+
+            .skill {
+                width: 120px; /* Adjust width for smaller screens */
+                height: 50px; /* Adjust height for smaller screens */
+                font-size: 1em; /* Adjust font size for smaller screens */
+            }
+        }
+    </style>
+
+    <h2>Skills</h2>
+    <div class="skills-list">
+        <div class="skill">Java</div>
+        <div class="skill">HTML</div>
+        <div class="skill">CSS</div>
+        <div class="skill">JavaScript</div>
+    </div>
+</div>
+
+<!-- Link to Font Awesome CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<div class="projects-section">
+    <style>
+        @keyframes fadeInBlur {
+            0% {
+                opacity: 0;
+                filter: blur(10px);
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                filter: blur(0);
+                transform: scale(1);
+            }
+        }
+
+        .projects-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        .projects-section h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-align: center;
+            animation: fadeInBlur 1s ease-in-out;
+        }
+
+        .projects-list {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap; /* Wrap projects to the next line on smaller screens */
+        }
+
+        .project-card {
+            background-color: #fff;
+            width: 300px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 10px; /* Added margin for better spacing on smaller screens */
+        }
+
+        .project-card:hover {
+            transform: scale(1.05);
+        }
+
+        .project-buttons {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .project-buttons a {
+            background-color: #22489E;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .project-buttons a:hover {
+            background-color: #BDCDEA;
+            color: #22489E;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 600px) {
+            .projects-section h2 {
+                font-size: 1.5em; /* Adjust heading size for smaller screens */
+            }
+
+            .projects-list {
+                gap: 10px; /* Reduce gap between projects */
+            }
+
+            .project-card {
+                width: 90%; /* Adjust width for smaller screens */
+                padding: 10px; /* Adjust padding for smaller screens */
+            }
+
+            .project-buttons a {
+                padding: 8px 16px; /* Adjust button padding for smaller screens */
+                font-size: 0.9em; /* Adjust font size for smaller screens */
+            }
+        }
+    </style>
+
+    <h2>Projects</h2>
+    <div class="projects-list">
+        <div class="project-card">
+            <h3>Project 1</h3>
+            <p>Description of project 1.</p>
+            <div class="project-buttons">
+                <a href="https://github.com" target="_blank">GitHub Repo</a>
+                <a href="https://example.com" target="_blank">Demo</a>
+            </div>
+        </div>
+        <div class="project-card">
+            <h3>Project 2</h3>
+            <p>Description of project 2.</p>
+            <div class="project-buttons">
+                <a href="https://github.com" target="_blank">GitHub Repo</a>
+                <a href="https://example.com" target="_blank">Demo</a>
+            </div>
+        </div>
+        <div class="project-card">
+            <h3>Project 3</h3>
+            <p>Description of project 3.</p>
+            <div class="project-buttons">
+                <a href="https://github.com" target="_blank">GitHub Repo</a>
+                <a href="https://example.com" target="_blank">Demo</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Link to Font Awesome CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+<!-- Link to Font Awesome CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<div class="section">
+    <style>
+        .section {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+            flex-direction: column;
+        }
+
+        .section h2 {
+            font-size: 2em;
+            margin-bottom: 100px; /* More space from the icon */
+            text-align: center;
+        }
+
+        .contact {
+            position: relative;
+            display: inline-block;
+            font-size: 48px; /* Icon size */
+            margin: 20px; /* Space between icons */
+            cursor: pointer;
+        }
+
+        .contact .icon {
+            color: #0077b5; /* LinkedIn color */
+        }
+
+        .message {
+            visibility: hidden;
+            width: 160px; /* Adjust width for a better fit with larger icon */
+            background-color: #0077b5;
+            color: #fff;
+            text-align: center;
+            padding: 5px 0;
+            border-radius: 6px;
+            position: absolute;
+            bottom: 125%; /* Position above the icon */
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 2.5s;
+            font-size: 16px; /* Adjust font size for better visibility */
+            white-space: nowrap; /* Prevent text from wrapping */
+        }
+
+        .message::after {
+            content: "";
+            position: absolute;
+            top: 100%; /* At the bottom of the message */
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 5px;
+            border-style: solid;
+            border-color: #0077b5 transparent transparent transparent;
+        }
+
+        .contact:hover .message {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #22489E;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            width: 100%;
+            position: relative;
+            bottom: 0;
+            border-top-left-radius: 20%;
+            border-top-right-radius: 20%;
+        }
+    </style>
+
+    <h2>Contact Me</h2>
+    <a href="https://www.linkedin.com" target="_blank" class="contact linkedin">
+        <i class="fab fa-linkedin icon"></i>
+        <span class="message">DM me on LinkedIn</span>
+    </a>
+</div>
+
+<footer> @ copyright 2024 by Hussain </footer>
+
+<!-- Link to Font Awesome CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
